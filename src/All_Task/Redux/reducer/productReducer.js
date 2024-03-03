@@ -1,19 +1,23 @@
-const initialState = {
+import { ADD_TO_CART, DELETE_FROM_CART, FETCH_PRODUCT_DATA } from "../actionType";
 
-}
+const initialState = {};
 
 export default (state = [], { type, payload }) => {
-    switch (type) {
+  switch (type) {
+    case FETCH_PRODUCT_DATA:
+      return [...state, ...payload];
 
-        case 'getData':
-            return [...state, ...payload]
-        case 'Datadlt':
-            let d = [...state]
-            d.splice(payload, 10)
+    case ADD_TO_CART:
+      let addToCart = [...state];
+      addToCart.push(payload);
+      return addToCart;
 
-            return d
+    case DELETE_FROM_CART:
+      let dltFromCart = [...state];
+      dltFromCart.pop(payload);
+      return dltFromCart;
 
-        default:
-            return state
-    }
-}
+    default:
+      return state;
+  }
+};
